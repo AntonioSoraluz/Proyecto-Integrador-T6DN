@@ -103,11 +103,44 @@
 										    <div class="card-header" id="headingTwo">
 										      <h5 class="mb-0">
 										        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-										          Score de la Empresa
+										          Inversiones en esta Oportunidad
 										        </button>
 										      </h5>
 										    </div>
 										    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+										      <div class="card-body">
+										       	<div class="row">
+										       	<div class="container">
+										       	<p class="card-title text-dark font-weight-bold text-left"> Últimas tres Inversiones realizadas :</p>
+										       	<div class="dropdown-divider"></div>
+										       	<th:block th:if="${#lists.isEmpty(ultimasInversiones)}">
+									            <p class="text-muted text-left">No hay Inversiones registradas en esta oportunidad.</p>
+									          	</th:block>
+										       	<th:block th:each="u : ${ultimasInversiones}">
+										       		<div class="col-lg-12">
+										       			<p class="card-text font-weight-bold text-left" th:text="'Monto Invertido: '+'S/'+${u.monto_invertido}"></p>
+										       			<p class="card-text font-weight-bold text-left" th:text="'Porcentaje de la Oportunidad: '+${u.porcentaje_oportunidad}+'%'"></p>
+										       			<p class="card-text font-weight-bold text-left" th:text="'Fecha de la Inversión: '+${#dates.format(u.fecha_registro, 'MM-dd-yyyy')}"></p>
+										       			<div class="dropdown-divider"></div>
+										       			<br>
+										       		</div>
+										       	</th:block>
+										       	<p class="card-title text-dark font-weight-bold text-left">Total de Inversiones realizadas a esta Oportunidad: 
+										       	<span class="card-title text-dark font-weight-boldcard-title text-dark font-weight-bold" th:text="${conteoInversiones}"></span></p>
+										       	</div>
+										       	</div>
+										      </div>
+											</div>
+										</div>
+										 <div class="card">
+										    <div class="card-header" id="headingThree">
+										      <h5 class="mb-0">
+										        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+										          Score de la Empresa
+										        </button>
+										      </h5>
+										    </div>
+										    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
 										      <div class="card-body">
 											       <table class="table table-bordered table-responsive">
 											       		<thead>
@@ -136,15 +169,15 @@
 										      </div>
 											</div>
 										</div>
-										 <div class="card">
-										    <div class="card-header" id="headingThree">
+										<div class="card">
+										    <div class="card-header" id="headingFour">
 										      <h5 class="mb-0">
-										        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+										        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
 										          Acerca de la Empresa
 										        </button>
 										      </h5>
 										    </div>
-										    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+										    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
 										      <div class="card-body">
 										       	<div class="row">
 										       		<div class="col-lg-6">

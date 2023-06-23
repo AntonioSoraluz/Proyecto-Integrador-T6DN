@@ -189,8 +189,15 @@ public class UsuarioController {
 		    OportunidadesPagadasResult oportunidadPR = new OportunidadesPagadasResult(count, sum);
 		    oportunidadesPagadas.add(oportunidadPR);
 		}
-
+		
 		model.addAttribute("oportunidadesPagadas", oportunidadesPagadas);
+		
+		Pageable pageable = PageRequest.of(0, 3);
+		List<OportunidadUsuario> ultimasInversiones = oportunidadUsuarioRepository.findUltimasInversiones(idOportunidad, pageable);
+		model.addAttribute("ultimasInversiones", ultimasInversiones);
+		
+		Long conteoInversiones = oportunidadUsuarioRepository.contarInversionesPorOportunidadId(idOportunidad);
+		model.addAttribute("conteoInversiones", conteoInversiones);
 		return "verOportunidad";
 	}
 	

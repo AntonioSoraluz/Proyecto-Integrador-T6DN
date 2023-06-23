@@ -17,4 +17,8 @@ public interface OportunidadUsuarioRepository extends JpaRepository<OportunidadU
 	Page<OportunidadUsuario> findByObjUsuarioId(Long id, Pageable pageable);
 	@Query(value = "SELECT COUNT(ou.usuario_id) AS numerooportunidadesinvertidas , COALESCE(SUM(ou.monto_invertido), 0) AS montototalinvertido FROM oportunidad_usuario ou WHERE ou.usuario_id = :usuarioId", nativeQuery = true)
 	List<Object[]> getOportunidadesUsuario(@Param("usuarioId") Long usuarioId);
+	@Query("SELECT ou FROM OportunidadUsuario ou WHERE ou.oportunidad_id = :idOportunidad ORDER BY ou.fecha_registro DESC")
+	List<OportunidadUsuario> findUltimasInversiones(@Param("idOportunidad") String idOportunidad, Pageable pageable);
+	@Query("SELECT COUNT(ou) FROM OportunidadUsuario ou WHERE ou.oportunidad_id = :idOportunidad")
+	Long contarInversionesPorOportunidadId(@Param("idOportunidad") String idOportunidad);
 }
