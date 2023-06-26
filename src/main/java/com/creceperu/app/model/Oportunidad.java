@@ -40,7 +40,7 @@ public class Oportunidad {
 	
 	@Column(name = "fechaPago")
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy-MM-dd ")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaPago;
 	
 	@Column(name = "fecharegistro")

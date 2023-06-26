@@ -151,6 +151,15 @@ a.article:hover {
     RESPONSIVE
 ----------------------------------------------------- */
 
+@media (max-width: 1366px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+}
+/*
 @media (max-width: 768px) {
     #sidebar {
         margin-left: -250px;
@@ -162,3 +171,4 @@ a.article:hover {
         display: none;
     }
 }
+*/

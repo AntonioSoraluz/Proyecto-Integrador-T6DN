@@ -21,4 +21,6 @@ public interface OportunidadUsuarioRepository extends JpaRepository<OportunidadU
 	List<OportunidadUsuario> findUltimasInversiones(@Param("idOportunidad") String idOportunidad, Pageable pageable);
 	@Query("SELECT COUNT(ou) FROM OportunidadUsuario ou WHERE ou.oportunidad_id = :idOportunidad")
 	Long contarInversionesPorOportunidadId(@Param("idOportunidad") String idOportunidad);
+	@Query("SELECT ou FROM OportunidadUsuario ou WHERE ou.oportunidad_id = :idOportunidad ORDER BY ou.fecha_registro DESC")
+	Page<OportunidadUsuario> findfindByOportunidad_id(@Param("idOportunidad") String idOportunidad, Pageable pageable);
 }

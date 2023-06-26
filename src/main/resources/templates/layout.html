@@ -61,7 +61,12 @@
                   <li><a th:href="@{/registroMovimiento/retiro}" class="d-block text-light p-3 border-0"><i class="icon ion-md-arrow-round-forward lead mr-2"></i> Nuevo Retiro</a></li>
                  </ul>
             </li>
-            <li><a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/oportunidad/registroOportunidad}" class="d-block text-light p-3 border-0"><i class="icon ion-md-podium lead mr-2"></i> Oportunidad</a></li>
+            <li><a href="#oportunidadSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="icon ion-md-podium lead mr-2"></i> Oportunidad</a>
+                 <ul class="collapse list-unstyled" id="oportunidadSubmenu">
+                 <li><a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/oportunidad/listaDeOportunidades}" class="d-block text-light p-3 border-0"><i class="icon ion-md-arrow-round-forward lead mr-2"></i> Lista de Oportunidades</a></li>
+                 <li><a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/oportunidad/registroOportunidad}" class="d-block text-light p-3 border-0"><i class="icon ion-md-arrow-round-forward lead mr-2"></i> Nueva Oportunidad</a></li>
+                 </ul>
+            </li>
             <li><a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/registroEmpresa}" class="d-block text-light p-3 border-0"><i class="icon ion-md-business lead mr-2"></i> Empresa</a></li>
             <li><a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/registroFactura}"class="d-block text-light p-3 border-0"><i class="icon ion-md-calculator lead mr-2"></i> Factura </a></li>
             <li><a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/dashboard}"class="d-block text-light p-3 border-0"><i class="icon ion-md-stats lead mr-2"></i> Dashboard </a></li>

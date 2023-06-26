@@ -318,17 +318,6 @@
       }
     });
 
-    /*function calcularTotalFacturas() {
-      var total = 0;
-      $("#tabladestino tbody tr").each(function() {
-        var monto = parseFloat($(this).find("td:nth-child(4)").text());
-        if (!isNaN(monto)) {
-          total += monto;
-        }
-      });
-      $("#totalfacturas").val(total.toFixed(2));
-    }*/
-
     document.getElementById('formulario').addEventListener('submit', function(event) {
         // Obtener todos los códigos de la columna "Código"
         var codigos = [];

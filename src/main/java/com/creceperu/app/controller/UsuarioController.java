@@ -71,20 +71,7 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/")
-	public String verPaginaDeInicio(Model model, Authentication authentication, @RequestParam(defaultValue = "0") int page) {
-		int pageSize = 8; // Número de elementos por página
-		CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-		Saldo saldo = saldoRepository.findById(customUserDetails.getId()).orElse(new Saldo(customUserDetails.getId(), 0.0));
-		model.addAttribute("saldo", saldo.getSaldo());
-		Pageable pageable = PageRequest.of(page, pageSize);
-		Page<Oportunidad> oportunidadesPage = oportunidadRepository.findOportunidadesXFiltro("", pageable);
-		model.addAttribute("lstOportunidades", oportunidadesPage.getContent());
-		model.addAttribute("currentPage", page);
-	    model.addAttribute("totalPages", oportunidadesPage.getTotalPages());
-		return "principal";
-	}
-	@PostMapping("/")
-	public String verPaginaConFiltro(Model model, Authentication authentication, @RequestParam("filtro") String filtro,
+	public String verPaginaConFiltro(Model model, Authentication authentication, @RequestParam(required = false, defaultValue = "") String filtro,
 			@RequestParam(defaultValue = "0") int page) {
 		int pageSize = 8; // Número de elementos por página
 		CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
@@ -95,6 +82,8 @@ public class UsuarioController {
 		model.addAttribute("lstOportunidades", oportunidadesPage.getContent());
 		model.addAttribute("currentPage", page);
 	    model.addAttribute("totalPages", oportunidadesPage.getTotalPages());
+	 // Agregar los parámetros de búsqueda al modelo para mantenerlos en la vista
+        model.addAttribute("filtro", filtro);
 		return "principal";
 	}
 	@ResponseBody

@@ -24,7 +24,7 @@
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 	<form class="form-inline position-relative d-inline-block my-2"
-					th:action="@{/}" method="post">
+					th:action="@{/}" method="get">
 						<input class="form-control ml-sm-2" type="search" placeholder="Buscar"
 							   aria-label="Buscar" name="filtro">
 						<button class="btn btn-search my-2 my-sm-0" type="submit">
@@ -93,16 +93,16 @@
 								    <nav>
 								        <ul class="pagination justify-content-center">
 								            <li class="page-item" th:classappend="${currentPage == 0} ? disabled">
-								                <a class="page-link" th:href="@{/(page=0)}">Primera</a>
+								                <a class="page-link" th:href="@{/(page=0, filtro=${filtro})}">Primera</a>
 								            </li>
 								            <li class="page-item" th:classappend="${currentPage == 0} ? disabled">
-								                <a class="page-link" th:href="@{/(page=${currentPage - 1})}">Anterior</a>
+								                <a class="page-link" th:href="@{/(page=${currentPage - 1}, filtro=${filtro})}">Anterior</a>
 								            </li>
 								            <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? disabled">
-								                <a class="page-link" th:href="@{/(page=${currentPage + 1})}">Siguiente</a>
+								                <a class="page-link" th:href="@{/(page=${currentPage + 1}, filtro=${filtro})}">Siguiente</a>
 								            </li>
 								            <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? disabled">
-								                <a class="page-link" th:href="@{/(page=${totalPages - 1})}">Última</a>
+								                <a class="page-link" th:href="@{/(page=${totalPages - 1}, filtro=${filtro})}">Última</a>
 								            </li>
 								        </ul>
 								    </nav>
