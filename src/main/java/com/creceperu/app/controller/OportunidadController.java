@@ -157,16 +157,20 @@ public class OportunidadController {
         return "listaOportunidades";
     }
 
-	
     @GetMapping("/listaInversionesXOportunidad")
 	public String listaDeInversionesXOportunidad(Model model, @RequestParam("idOportunidad") String idOportunidad,@RequestParam(defaultValue = "0") int page) {
-    	int pageSize = 10; // Número de elementos por página
+    	int pageSize = 3; // Número de elementos por página
+    	Oportunidad oportunidad = oportunidadRepository.findByOportunidadId(idOportunidad);
+    	Long conteoInversiones = oportunidadUsuarioRepository.contarInversionesPorOportunidadId(idOportunidad);
+		model.addAttribute("conteoInversiones", conteoInversiones);
+	    model.addAttribute("oportunidadXId", oportunidad);
 	    Sort sort = Sort.by(Sort.Direction.DESC, "fecha_registro");
 	    Pageable pageable = PageRequest.of(page, pageSize, sort);
 	    Page<OportunidadUsuario> oportunidadUsuarioPage = oportunidadUsuarioRepository.findfindByOportunidad_id(idOportunidad, pageable);
 	    model.addAttribute("lstOportunidadesUsuario", oportunidadUsuarioPage.getContent());
 	    model.addAttribute("currentPage", page);
 	    model.addAttribute("totalPages", oportunidadUsuarioPage.getTotalPages());
-		return "oportunidad";
+	    model.addAttribute("idOportunidad", idOportunidad);
+	    return "oportunidadDetalle";
 	}
 }

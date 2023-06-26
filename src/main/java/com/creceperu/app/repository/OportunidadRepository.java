@@ -31,25 +31,6 @@ public interface OportunidadRepository extends JpaRepository<Oportunidad, String
 	@Query(value = "SELECT COUNT(o.estado) AS oportunidadespagadas, COALESCE(SUM(o.monto),0) AS montooportunidadespagadas FROM empresa e INNER JOIN oportunidad o ON e.id_empresa = o.id_empresa WHERE o.estado = 'Pagada' AND e.razonsocial = :razonsocial", nativeQuery = true)
 	List<Object[]> getOportunidadesPagadas(@Param("razonsocial") String razonsocial);
 	
-	/*@Query("SELECT o FROM Oportunidad o INNER JOIN o.objEmpresa e WHERE (:razonsocial IS NULL OR e.razonsocial = :razonsocial) AND (:ruc IS NULL OR e.ruc = :ruc) AND (:fecharegistro IS NULL OR o.fecharegistro = :fecharegistro) AND (:fechaPago IS NULL OR o.fecha_pago = :fechaPago) AND (:calificacion IS NULL OR o.calificacion = :calificacion) AND (:estado IS NULL OR o.estado = :estado)")
-	Page<Oportunidad> findOportunidadesByFiltro(@Param("razonsocial") String razonsocial, @Param("ruc") String ruc, @Param("fecharegistro") String fecharegistro, @Param("fechaPago") String fechaPago, @Param("calificacion") String calificacion, @Param("estado") String estado, Pageable pageable);*/
-	/*
-	 @Query("SELECT o FROM Oportunidad o INNER JOIN o.objEmpresa e " +
-            "WHERE ((o.estado = 'Disponible') OR (o.estado = :estado)) " +
-			"AND (:razonsocial IS NULL OR e.razonsocial = :razonsocial) " +
-            "AND (:ruc IS NULL OR e.ruc = :ruc) " +
-            "AND (:fecharegistro IS NULL OR DATE(o.fecharegistro) = :fecharegistro) " +
-            "AND (:fechaPago IS NULL OR DATE(o.fechaPago) = :fechaPago) " +
-            "AND (:calificacion IS NULL OR o.calificacion = :calificacion) " +
-            "ORDER BY o.fecharegistro")
-	Page<Oportunidad> findOportunidadesByFiltro(@Param("estado") String estado,
-												@Param("razonsocial") String razonsocial,
-                                                @Param("ruc") String ruc,
-                                                @Param("fecharegistro") Date fecharegistro,
-                                                @Param("fechaPago") Date fechaPago,
-                                                @Param("calificacion") String calificacion,
-                                                Pageable pageable);
-	 */
 	@Query("SELECT o FROM Oportunidad o INNER JOIN o.objEmpresa e " +
             "WHERE (:razonsocial IS NULL OR e.razonsocial = :razonsocial) " +
             "AND (:ruc IS NULL OR e.ruc = :ruc) " +
