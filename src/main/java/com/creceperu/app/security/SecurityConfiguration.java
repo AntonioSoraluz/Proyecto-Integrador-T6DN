@@ -42,7 +42,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().
 		antMatchers("/registroEmpresa", 
 				"/registroFactura",
-				"/oportunidad/registroOportunidad").hasRole("ADMIN").antMatchers(
+				"/oportunidad/registroOportunidad",
+				"/oportunidad/listaDeOportunidades",
+				"/oportunidad/listaInversionesXOportunidad").hasRole("ADMIN").antMatchers(
 				"/registro**",
 				"/js/**",
 				"/css/**",
