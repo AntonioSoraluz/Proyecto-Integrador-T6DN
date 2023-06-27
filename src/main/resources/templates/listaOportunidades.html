@@ -27,7 +27,7 @@
 			</section>
 			<section class="bg-light py-3">
 			      <div class="col-lg-12">
-					<form class="form flex-column" th:action="@{/oportunidad/listaDeOportunidades}" method="get">
+					<!--<form class="form flex-column" th:action="@{/oportunidad/listaDeOportunidades}" method="get">
 						<div class="form-row">
 						  <div class="form-group col-md-4 mb-md-0">
 						    <label for="razonSocial" class="control-label">Razón Social :</label>
@@ -75,6 +75,57 @@
 								<button type="submit" class="btn btn-primary btn-block">Buscar</button>
 							</div>
 						 </div>			  
+					</form>-->
+					<form class="form flex-column" th:action="@{/oportunidad/listaDeOportunidades}" method="get">
+					    <div class="form-row">
+					        <div class="form-group col-md-4 mb-md-0">
+					            <label for="razonSocial" class="control-label">Razón Social :</label>
+					            <input type="text" class="form-control" id="razonSocial" name="razonsocial" th:value="${razonsocial}">
+					        </div>
+					        <div class="form-group col-md-4 mb-md-0">
+					            <label for="ruc" class="control-label">Ruc :</label>
+					            <input type="text" class="form-control" id="ruc" name="ruc" th:value="${ruc}">
+					        </div>
+					        <div class="form-group col-md-4 mb-md-0">
+					            <label for="fechaRegistro" class="control-label">Fecha de Registro :</label>
+					            <input type="text" class="form-control fechaformato" id="fechaRegistro" name="fecharegistro" autofocus="autofocus" placeholder="Mes-Día-Año" th:value="${fecharegistro}">
+					        </div>
+					    </div>
+					    <div class="form-row">
+					        <div class="form-group col-md-4 mb-md-0">
+					            <label for="fechaPago" class="control-label">Fecha de Pago :</label>
+					            <input type="text" class="form-control fechaformato" id="fechaPago" name="fechaPago" autofocus="autofocus" placeholder="Mes-Día-Año" th:value="${fechaPago}">
+					        </div>
+					        <div class="form-group col-md-4 mb-md-0">
+					            <label for="calificacion" class="control-label">Calificación :</label>
+					            <select class="custom-select" id="calificacion" name="calificacion">
+					                <option selected value="">Seleccione...</option>
+					                <option value="A" th:selected="${calificacion == 'A'}">A</option>
+					                <option value="B" th:selected="${calificacion == 'B'}">B</option>
+					                <option value="C" th:selected="${calificacion == 'C'}">C</option>
+					                <option value="D" th:selected="${calificacion == 'D'}">D</option>
+					                <option value="E" th:selected="${calificacion == 'E'}">E</option>
+					            </select>
+					        </div>
+					        <div class="form-group col-md-4 mb-md-0">
+					            <label for="estado" class="control-label">Estado :</label>
+					            <select class="custom-select" id="estado" name="estado">
+					                <option selected value="">Seleccione...</option>
+					                <option value="Disponible" th:selected="${estado == 'Disponible'}">Disponible</option>
+					                <option value="Tomada" th:selected="${estado == 'Tomada'}">Tomada</option>
+					            </select>
+					        </div>
+					    </div>
+					    <div class="form-row">
+								<div class="form-group col-md-6">
+									<label></label>
+					            	<a class="btn btn-secondary btn-block" th:href="@{/oportunidad/listaDeOportunidades(page=0, razonsocial='', ruc='', fecharegistro=${fecharegistro}, fechaPago='', calificacion='', estado='')}">Limpiar</a>
+								</div>
+								<div class="form-group col-md-6">
+					            	<label></label>
+					            	<button type="submit" class="btn btn-primary btn-block">Buscar</button>
+								</div>
+					    </div>
 					</form>
 						<table class="table table-bordered table-responsive w-100">
 							<thead>

@@ -82,7 +82,7 @@ public class UsuarioController {
 		model.addAttribute("lstOportunidades", oportunidadesPage.getContent());
 		model.addAttribute("currentPage", page);
 	    model.addAttribute("totalPages", oportunidadesPage.getTotalPages());
-	 // Agregar los parámetros de búsqueda al modelo para mantenerlos en la vista
+	    // Agregar los parámetros de búsqueda al modelo para mantenerlos en la vista
         model.addAttribute("filtro", filtro);
 		return "principal";
 	}
