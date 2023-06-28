@@ -145,8 +145,9 @@ setTimeout(function(){
     var alertaElement = document.getElementById('alerta');
     if (alertaElement) {
         alertaElement.remove();
+        window.location.href = "/oportunidad/listaDeOportunidades";
     }
-}, 3000);
+}, 2000);
 $(document).ready(function() {
   $('.fechaformato').on('input', function() {
     var dateValue = $(this).val();   
