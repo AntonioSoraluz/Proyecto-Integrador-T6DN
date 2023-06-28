@@ -27,55 +27,6 @@
 			</section>
 			<section class="bg-light py-3">
 			      <div class="col-lg-12">
-					<!--<form class="form flex-column" th:action="@{/oportunidad/listaDeOportunidades}" method="get">
-						<div class="form-row">
-						  <div class="form-group col-md-4 mb-md-0">
-						    <label for="razonSocial" class="control-label">Razón Social :</label>
-						    <input type="text" class="form-control" id="razonSocial" name="razonsocial">
-						  </div>
-						  <div class="form-group col-md-4 mb-md-0">
-						    <label for="ruc" class="control-label">Ruc :</label>
-						    <input type="text" class="form-control" id="ruc" name="ruc">
-						  </div>
-						  <div class="form-group col-md-4 mb-md-0">
-						    <label for="fechaRegistro" class="control-label">Fecha de Registro :</label>
-						    <input type="text" class="form-control fechaformato" id="fechaRegistro" name="fecharegistro"
-						    autofocus="autofocus" placeholder="Mes-Día-Año">
-						  </div>
-						 </div>
-						 <div class="form-row">
-						  <div class="form-group col-md-4 mb-md-0">
-						    <label for="fechaPago" class="control-label">Fecha de Pago :</label>
-						    <input type="text" class="form-control fechaformato" id="fechaPago" name="fechaPago"
-						    autofocus="autofocus" placeholder="Mes-Día-Año">
-						  </div>
-						  <div class="form-group col-md-4 mb-md-0">
-						  	<label for="calificacion" class="control-label">Calificación :</label>
-							<select class="custom-select" id="calificacion" name="calificacion">
-								<option selected value="">Seleccione...</option>
-								<option value="A">A</option>
-								<option value="B">B</option>
-								<option value="C">C</option>
-								<option value="D">D</option>
-								<option value="E">E</option>
-							</select>
-						  </div>
-						  <div class="form-group col-md-4 mb-md-0">
-						    <label for="estado" class="control-label">Estado :</label>
-						    <select class="custom-select" id="estado" name="estado">
-								<option selected value="">Seleccione...</option>
-								<option value="Disponible">Disponible</option>
-								<option value="Tomada">Tomada</option>
-							</select>
-						  </div>
-						 </div>
-						 <div class="form-group">
-						 	<div class="text-center">
-						 		<label></label>
-								<button type="submit" class="btn btn-primary btn-block">Buscar</button>
-							</div>
-						 </div>			  
-					</form>-->
 					<form class="form flex-column" th:action="@{/oportunidad/listaDeOportunidades}" method="get">
 					    <div class="form-row">
 					        <div class="form-group col-md-4 mb-md-0">
@@ -188,17 +139,25 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
-	  $('.fechaformato').keyup(function() {
-	    var dateValue = $(this).val();
-	    if (dateValue.length === 2) {
-	      $(this).val(dateValue + '-');
-	    } else if (dateValue.length === 5) {
-	      $(this).val(dateValue + '-');
-	    } else if (dateValue.length > 10) {
-	      $(this).val(dateValue.slice(0, 10));
-	    }
-	  });
-	});
+  $('.fechaformato').on('input', function() {
+    var dateValue = $(this).val();   
+    // Eliminar todos los caracteres excepto números y guiones
+    var cleanedValue = dateValue.replace(/[^0-9-]/g, '');   
+    // Añadir guiones automáticamente en las posiciones adecuadas
+    if (cleanedValue.length > 2 && cleanedValue.charAt(2) !== '-') {
+      cleanedValue = cleanedValue.slice(0, 2) + '-' + cleanedValue.slice(2);
+    }
+    if (cleanedValue.length > 5 && cleanedValue.charAt(5) !== '-') {
+      cleanedValue = cleanedValue.slice(0, 5) + '-' + cleanedValue.slice(5);
+    }
+    // Limitar la longitud máxima a 10 caracteres
+    if (cleanedValue.length > 10) {
+      cleanedValue = cleanedValue.slice(0, 10);
+    }
+    // Actualizar el valor del campo
+    $(this).val(cleanedValue);
+  });
+});
 </script>
 </body>
 </html>

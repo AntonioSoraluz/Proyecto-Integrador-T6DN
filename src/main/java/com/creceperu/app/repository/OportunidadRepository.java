@@ -34,8 +34,8 @@ public interface OportunidadRepository extends JpaRepository<Oportunidad, String
 	@Query("SELECT o FROM Oportunidad o INNER JOIN o.objEmpresa e " +
             "WHERE (:razonsocial IS NULL OR e.razonsocial = :razonsocial) " +
             "AND (:ruc IS NULL OR e.ruc = :ruc) " +
-            "AND (:fecharegistro IS NULL OR DATE(o.fecharegistro) = :fecharegistro) " +
-            "AND (:fechaPago IS NULL OR DATE(o.fechaPago) = :fechaPago) " +
+            "AND (:fecharegistro IS NULL OR DATE(o.fecharegistro) >= :fecharegistro) " +
+            "AND (:fechaPago IS NULL OR DATE(o.fechaPago) <= :fechaPago) " +
             "AND (:calificacion IS NULL OR o.calificacion = :calificacion) " +
             "AND (:estado IS NULL OR o.estado = :estado)" +
             "ORDER BY o.fecharegistro")
