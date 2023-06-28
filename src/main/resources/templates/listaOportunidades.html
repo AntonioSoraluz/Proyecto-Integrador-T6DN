@@ -78,6 +78,9 @@
 								</div>
 					    </div>
 					</form>
+					<th:block th:if="${#lists.isEmpty(lstOportunidades)}">
+						<div class="alert alert-warning" id="alerta">No se encontró ninguna Oportundiad.</div>
+					</th:block>
 						<table class="table table-bordered table-responsive w-100">
 							<thead>
 								<tr>
@@ -138,6 +141,12 @@
 	</div>
 </div>
 <script type="text/javascript">
+setTimeout(function(){
+    var alertaElement = document.getElementById('alerta');
+    if (alertaElement) {
+        alertaElement.remove();
+    }
+}, 3000);
 $(document).ready(function() {
   $('.fechaformato').on('input', function() {
     var dateValue = $(this).val();   
