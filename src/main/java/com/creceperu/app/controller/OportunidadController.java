@@ -1,14 +1,22 @@
 package com.creceperu.app.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -25,14 +33,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.creceperu.app.controller.dto.OportunidadDTO;
 import com.creceperu.app.model.Oportunidad;
 import com.creceperu.app.model.OportunidadUsuario;
-import com.creceperu.app.model.OportunidadesXFiltroResult;
 import com.creceperu.app.repository.EmpresaRepository;
 import com.creceperu.app.repository.FacturaRepository;
 import com.creceperu.app.repository.OportunidadFacturaRepository;
 import com.creceperu.app.repository.OportunidadRepository;
 import com.creceperu.app.repository.OportunidadUsuarioRepository;
 import com.creceperu.app.service.OportunidadService;
-import com.creceperu.app.service.UsuarioServiceImpl.CustomUserDetails;
+
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 @Controller
 @RequestMapping("/oportunidad")
@@ -55,6 +67,12 @@ public class OportunidadController {
 	
 	@Autowired
 	private FacturaRepository facturaRepository;
+	
+	@Autowired
+	private DataSource dataSource;
+	
+	@Autowired
+	private ResourceLoader resourceLoader;
 	
 	public OportunidadController (OportunidadService oportunidadService) {
 		super();
@@ -173,4 +191,23 @@ public class OportunidadController {
 	    model.addAttribute("idOportunidad", idOportunidad);
 	    return "oportunidadDetalle";
 	}
+    
+    @GetMapping("/reporteOportunidadXIdUsuario")
+	public void reporteUnidadOrg(@RequestParam("idOportunidad") String idOportunidad, HttpServletResponse response) {
+		Map<String, Object> parametros = new HashMap<>();
+        parametros.put("idOportunidad", idOportunidad);
+		try {
+			String ru = resourceLoader.getResource("classpath:static/reports/reportOportunidadXId.jasper").getURI().getPath();
+			FileInputStream stream   = new FileInputStream(new File(ru));
+			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(stream);
+	        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, dataSource.getConnection());
+			response.setContentType("application/x-pdf");
+	        response.addHeader("Content-disposition", "attachment; filename=ReporteOportunidad_ID_" + idOportunidad + ".pdf");
+	        OutputStream outStream = response.getOutputStream();
+            JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+   
 }

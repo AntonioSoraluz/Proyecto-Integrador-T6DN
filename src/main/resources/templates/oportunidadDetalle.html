@@ -20,11 +20,26 @@
 			<section class="bg-light py-3">
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-12 col-md-8">
-							<h1 class="font-weight-bold mb-0 text-left">Oportunidad de Negocio : <span class="font-weight-bold mb-0"
-							th:text="${oportunidadXId.id_oportunidad}"></span> | <span th:class="${oportunidadXId.estado == 'Disponible' ? 'badge badge-success ml-2 text-white font-weight-bold' : 
-			                'badge badge-warning ml-2 text-white font-weight-bold'}" th:text="${oportunidadXId.estado}"></span></h1>
-						</div>
+						<th:block th:if="${!#lists.isEmpty(lstOportunidadesUsuario)}">
+							<div class="col-lg-1">
+								<form th:action="@{/oportunidad/reporteOportunidadXIdUsuario}" method="get">
+									<input type="hidden" name="idOportunidad" th:value="${oportunidadXId.id_oportunidad}">
+									<button type="submit" class="btn btn-dark"><i class="icon ion-md-download lead mr-2"></i></button>
+								</form>
+							</div>
+							<div class="col-lg-11 col-md-8">
+								<h1 class="font-weight-bold mb-0 text-left">Oportunidad de Negocio : <span class="font-weight-bold mb-0"
+								th:text="${oportunidadXId.id_oportunidad}"></span> | <span th:class="${oportunidadXId.estado == 'Disponible' ? 'badge badge-success ml-2 text-white font-weight-bold' : 
+				                'badge badge-warning ml-2 text-white font-weight-bold'}" th:text="${oportunidadXId.estado}"></span></h1>
+				            </div>
+						</th:block>
+						<th:block th:if="${#lists.isEmpty(lstOportunidadesUsuario)}">
+							<div class="col-lg-12 col-md-8">
+								<h1 class="font-weight-bold mb-0 text-left">Oportunidad de Negocio : <span class="font-weight-bold mb-0"
+								th:text="${oportunidadXId.id_oportunidad}"></span> | <span th:class="${oportunidadXId.estado == 'Disponible' ? 'badge badge-success ml-2 text-white font-weight-bold' : 
+				                'badge badge-warning ml-2 text-white font-weight-bold'}" th:text="${oportunidadXId.estado}"></span></h1>
+				            </div>
+						</th:block>
 					</div>
 				</div>
 			</section>
